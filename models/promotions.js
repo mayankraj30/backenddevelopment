@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 require('mongoose-currency').loadType(mongoose);
-
+const Currency = mongoose.Types.Currency;
 // {
 //     "name": "Weekend Grand Buffet",
 //     "image": "images/buffet.png",
@@ -11,7 +11,7 @@ require('mongoose-currency').loadType(mongoose);
 //     "featured": false
 // }
 
-const promotionSchema = new Schema({
+const promotionSchema = new schema({
     name : {
         type : String,
         required : true
@@ -37,5 +37,10 @@ const promotionSchema = new Schema({
         type : Boolean,
         default : false
     },
+},{
+        timestamps : true 
 })
+
+var Promotions = mongoose.model('Promotion',promotionSchema);
+module.exports = Promotions;
 
