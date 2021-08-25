@@ -36,6 +36,8 @@ app.use(cookieParser('12345-67890-09876-54321'));
 function auth(req, res, next) {
   console.log(req.signedCookies);
 
+  //checking if cookie is setup already or not
+
   if (!req.signedCookies.user) {
     var authHeader = req.headers.authorization;
     console.log(authHeader);
@@ -53,6 +55,7 @@ function auth(req, res, next) {
     var password = auth[1];
 
     if (username === 'admin' && password === 'password') {
+      //setting up cookie for the first time if the user is authenticated by using basic authentication method
       res.cookie('user', 'admin',{ signed:true})
       next();
     }
